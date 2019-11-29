@@ -1,11 +1,9 @@
 package com.wangr.wechat.controller;
 
-import com.wangr.wechat.responsedata.BaseResponse;
 import com.wangr.wechat.util.aes.WXBizMsgCrypt;
 import com.wangr.wechat.util.constant.WechatConfigConstant;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author WangRui
@@ -15,10 +13,12 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping(value = "/")
+@Slf4j
 public class WechatAuthController {
 
     /**
      * 服务器校验
+     *
      * @param signature
      * @param timestamp
      * @param nonce
@@ -37,5 +37,20 @@ public class WechatAuthController {
         return echostr;
     }
 
+
+    @PostMapping
+    public String wechatMsg(String msg_signature, String timestamp, String nonce,@RequestBody String postData) {
+        log.info("收到消息,{}", postData);
+        try {
+            WXBizMsgCrypt wxBizMsgCrypt = new WXBizMsgCrypt(WechatConfigConstant.TOKEN,
+                    WechatConfigConstant.ENCODING_AESKEY, WechatConfigConstant.APP_ID);
+            String decryptMsg = wxBizMsgCrypt.decryptMsg(msg_signature, timestamp, nonce, postData);
+            log.info("收到消息解密后:" + decryptMsg);
+            return wxBizMsgCrypt.encryptMsg("哈哈哈哈，返回给微信的消息",timestamp,nonce);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "erroe";
+        }
+    }
 
 }
