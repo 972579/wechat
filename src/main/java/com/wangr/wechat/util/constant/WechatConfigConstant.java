@@ -9,13 +9,15 @@ package com.wangr.wechat.util.constant;
  */
 public class WechatConfigConstant {
 
-    public static final String TOKEN = "*";
+    public static final String TOKEN = "";
 
-    public static final String ENCODING_AESKEY = "*";
+    public static final String ENCODING_AESKEY = "";
 
-    public static final String APP_ID = "*";
+    public static final String APP_ID = "";
 
-    public static final String APP_SECRET = "*";
+    public static final String APP_SECRET = "";
+
+    public static final String ORIGINAL_ID = "";
 
 
 }
