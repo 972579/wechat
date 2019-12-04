@@ -11,6 +11,22 @@ import lombok.Data;
 @Data
 public class WechatMsgVo extends BaseWechatMsg {
     /**
+     * 接收方
+     */
+    private String ToUserName;
+    /**
+     * 发送方
+     */
+    private String FromUserName;
+    /**
+     * 时间戳
+     */
+    private String CreateTime;
+    /**
+     * 消息类型
+     */
+    private String MsgType;
+    /**
      * 内容
      */
     private String Content;
@@ -69,8 +85,12 @@ public class WechatMsgVo extends BaseWechatMsg {
 
     @Override
     public String toString() {
-        return super.toString() + "WechatMsgVo{" +
-                "Content='" + Content + '\'' +
+        return "WechatMsgVo{" +
+                "ToUserName='" + ToUserName + '\'' +
+                ", FromUserName='" + FromUserName + '\'' +
+                ", CreateTime='" + CreateTime + '\'' +
+                ", MsgType='" + MsgType + '\'' +
+                ", Content='" + Content + '\'' +
                 ", MsgId='" + MsgId + '\'' +
                 ", PicUrl='" + PicUrl + '\'' +
                 ", MediaId='" + MediaId + '\'' +

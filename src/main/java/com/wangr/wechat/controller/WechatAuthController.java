@@ -1,6 +1,7 @@
 package com.wangr.wechat.controller;
 
-import com.wangr.wechat.util.XmlUtil;
+import com.wangr.wechat.util.WechatUtil;
+import com.wangr.wechat.util.XmlUtils;
 import com.wangr.wechat.util.aes.WXBizMsgCrypt;
 import com.wangr.wechat.util.constant.WechatConfigConstant;
 import com.wangr.wechat.vo.WechatMsgVo;
@@ -40,7 +41,8 @@ public class WechatAuthController {
     }
 
     /**
-     *  接收微信服务器推送的消息(并返回同样的消息，目前仅支持文本消息)
+     * 接收微信服务器推送的消息(并返回同样的消息，目前仅支持文本消息)
+     *
      * @param msg_signature
      * @param timestamp
      * @param nonce
@@ -53,9 +55,10 @@ public class WechatAuthController {
             WXBizMsgCrypt wxBizMsgCrypt = new WXBizMsgCrypt(WechatConfigConstant.TOKEN,
                     WechatConfigConstant.ENCODING_AESKEY, WechatConfigConstant.APP_ID);
             String decryptMsg = wxBizMsgCrypt.decryptMsg(msg_signature, timestamp, nonce, postData);
-            WechatMsgVo wechatMsgVo = XmlUtil.parseWechatXmlMsg(decryptMsg);
+            WechatMsgVo wechatMsgVo = XmlUtils.parseWechatXmlMsg(decryptMsg);
             log.info("解析后的消息:{}", wechatMsgVo);
-            return wxBizMsgCrypt.encryptMsg(XmlUtil.createWechatXmlMsg(wechatMsgVo.getFromUserName(),wechatMsgVo.getMsgType(),wechatMsgVo.getContent()), timestamp, nonce);
+            log.info("返回的消息:{}",WechatUtil.copyMsg(wechatMsgVo));
+             return wxBizMsgCrypt.encryptMsg(WechatUtil.copyMsg(wechatMsgVo), timestamp, nonce);
         } catch (Exception e) {
             e.printStackTrace();
             return "erroe";

@@ -26,14 +26,4 @@ public class BaseWechatMsg {
      * 消息类型
      */
     private String MsgType;
-
-    @Override
-    public String toString() {
-        return "BaseWechatMsg{" +
-                "ToUserName='" + ToUserName + '\'' +
-                ", FromUserName='" + FromUserName + '\'' +
-                ", CreateTime='" + CreateTime + '\'' +
-                ", MsgType='" + MsgType + '\'' +
-                '}';
-    }
 }
