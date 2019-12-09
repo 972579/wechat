@@ -6,12 +6,6 @@ import com.wangr.wechat.vo.WechatMsgVo;
 import com.wangr.wechat.vo.msg.image.Image;
 import com.wangr.wechat.vo.msg.image.ImageMessage;
 import com.wangr.wechat.vo.msg.text.TextMessage;
-import com.wangr.wechat.vo.msg.video.Video;
-import com.wangr.wechat.vo.msg.video.VideoMessage;
-import com.wangr.wechat.vo.msg.voice.Voice;
-import com.wangr.wechat.vo.msg.voice.VoiceMessage;
-
-import java.time.LocalDateTime;
 
 /**
  * @author WangRui
@@ -53,29 +47,22 @@ public class WechatUtil {
                 msg.setMsgType(WechatMsgTypeConstant.IMAGE);
                 break;
             case WechatMsgTypeConstant.VOICE:
-                msg = new VoiceMessage();
-                Voice voice = new Voice();
-                voice.setMediaId(vo.getMediaId());
-                ((VoiceMessage) msg).setVoice(voice);
-                msg.setMsgType(WechatMsgTypeConstant.VOICE);
+                // 音频需要提前定义在素材库，无法直接返回音频
+                msg = new TextMessage();
+                ((TextMessage) msg).setContent("暂不支持返回给你一样的音频，缓缓哈~~~");
+                msg.setMsgType(WechatMsgTypeConstant.TEXT);
                 break;
             case WechatMsgTypeConstant.VIDEO:
-                msg = new VideoMessage();
-                Video video = new Video();
-                video.setMediaId(vo.getMediaId());
-                video.setTitle("返回给你一个视频消息");
-                video.setDescription("这不是一样的嘛,有啥好看的");
-                ((VideoMessage) msg).setVideo(video);
-                msg.setMsgType(WechatMsgTypeConstant.VIDEO);
+                // 视频需要提前定义在素材库，无法直接返回视频
+                msg = new TextMessage();
+                ((TextMessage) msg).setContent("暂不支持返回给你一样的视频，缓缓哈~~~");
+                msg.setMsgType(WechatMsgTypeConstant.TEXT);
                 break;
             case WechatMsgTypeConstant.SHORTVIDEO:
-                msg = new VideoMessage();
-                Video shortVideo = new Video();
-                shortVideo.setMediaId(vo.getMediaId());
-                shortVideo.setTitle("返回给你一个小视频消息");
-                shortVideo.setDescription("这不是一样的嘛,有啥好看的");
-                ((VideoMessage) msg).setVideo(shortVideo);
-                msg.setMsgType(WechatMsgTypeConstant.VIDEO);
+                // 小视频需要提前定义在素材库，无法直接返回小视频
+                msg = new TextMessage();
+                ((TextMessage) msg).setContent("暂不支持返回给你一样的小视频，缓缓哈~~~");
+                msg.setMsgType(WechatMsgTypeConstant.TEXT);
                 break;
             case WechatMsgTypeConstant.LOCATION:
                 msg = new TextMessage();
