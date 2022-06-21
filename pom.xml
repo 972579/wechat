@@ -13,7 +13,7 @@
         <!-- 持久层版本控制 -->
         <mybatis.plus.version>3.1.0</mybatis.plus.version>
         <mybatis.pagehelper.version>1.2.10</mybatis.pagehelper.version>
-        <mysql.version>8.0.15</mysql.version>
+        <mysql.version>8.0.28</mysql.version>
         <hutool.version>4.5.8</hutool.version>
     </properties>
 
